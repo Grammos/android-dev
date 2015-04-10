@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">RaportiTi</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">HELP!</string>
+    <string name="button1">SUBMIT COORDINATES</string>
 </resources>

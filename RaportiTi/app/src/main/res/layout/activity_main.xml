@@ -10,8 +10,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit Coordinates"
-        android:id="@+id/button"
+        android:text="@string/button1"
+        android:id="@+id/button1"
         android:singleLine="true"
         android:shadowColor="@android:color/darker_gray"
         android:textColor="#FFFFFF"
@@ -19,5 +19,6 @@
         android:nestedScrollingEnabled="false"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:width="@dimen/abc_search_view_preferred_width" />
+        android:width="@dimen/abc_search_view_preferred_width"
+        android:layout_gravity="center" />
 </RelativeLayout>
