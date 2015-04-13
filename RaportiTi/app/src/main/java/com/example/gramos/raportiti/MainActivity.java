@@ -1,24 +1,18 @@
 package com.example.gramos.raportiti;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 
-public class MainActivity extends Activity implements View.OnClickListener, LocationListener {
+public class MainActivity extends Activity {
 
 
-    Button mbutton1;
+    Button button1;
+
+    GPSTracker gps;
 
 
     @Override
@@ -26,65 +20,31 @@ public class MainActivity extends Activity implements View.OnClickListener, Loca
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        button1 = (Button) findViewById(R.id.button1);
 
-
-        mbutton1 = (Button) findViewById(R.id.button1);
-        mbutton1.setOnClickListener(this);
-
-    }
-
-    @Override
-    public void onClick(View view) {
-
-                showOneButtonDialog();
-    }
-
-    private void showOneButtonDialog(){
-        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,1000,10,this);
-
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        dialogBuilder.setTitle("GPS is required");
-        dialogBuilder.setMessage("Turn on the GPS! Please pres the Settings");
-        dialogBuilder.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+        //show location button click event
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(intent);
+            public void onClick(View v) {
+                gps = new GPSTracker(MainActivity.this);
+
+                // check if GPS enabled
+                if(gps.canGetLocation()){
+
+                    double latitude = gps.getLatitude();
+                    double longitude = gps.getLongitude();
+
+                    // \n is for new line
+                    Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+                }else{
+                    // can't get location
+                    // GPS or Network is not enabled
+                    // Ask user to enable GPS/network in settings
+                    gps.showOneButtonDialog();
+                }
+
             }
         });
-        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "You clicked Cancel", Toast.LENGTH_SHORT).show();
-            }
-        });
-        AlertDialog alertDialog = dialogBuilder.create();
-        alertDialog.show();
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
 
     }
-
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String s) {
-        if(LocationManager.GPS_PROVIDER.equals(s)){
-            Toast.makeText(this,"GPS on",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onProviderDisabled(String s) {
-        if(LocationManager.GPS_PROVIDER.equals(s)){
-            Toast.makeText(this,"GPS off",Toast.LENGTH_SHORT).show();
-        }
-
-    }
-}
+ }
