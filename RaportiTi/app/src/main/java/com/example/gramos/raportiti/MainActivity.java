@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
 
         //show location button click event
         button1.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 gps = new GPSTracker(MainActivity.this);
