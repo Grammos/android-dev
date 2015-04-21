@@ -17,8 +17,38 @@
         android:textColor="#FFFFFF"
         android:background="#ff16c4ff"
         android:nestedScrollingEnabled="false"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
         android:width="@dimen/abc_search_view_preferred_width"
-        android:layout_gravity="center" />
+        android:layout_gravity="center|right"
+        android:clickable="true"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button3"
+        android:textColor="#FFFFFF"
+        android:shadowColor="@android:color/background_light"
+        android:width="320dp"
+        android:id="@+id/button"
+        android:clickable="true"
+        android:background="#ff7bff7b"
+        android:padding="@dimen/abc_action_bar_default_padding_material"
+        android:layout_below="@+id/button2"
+        android:layout_alignStart="@+id/button2"
+        android:singleLine="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowColor="@android:color/background_light"
+        android:text="@string/button0"
+        android:textColor="#FFFFFF"
+        android:id="@+id/button2"
+        android:background="#ffd2ff66"
+        android:layout_alignStart="@+id/button1"
+        android:layout_alignEnd="@+id/button1"
+        android:layout_below="@+id/button1"
+        android:singleLine="true"
+        android:nestedScrollingEnabled="false" />
 </RelativeLayout>

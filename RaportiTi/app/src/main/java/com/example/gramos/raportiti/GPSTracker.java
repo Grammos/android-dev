@@ -16,6 +16,7 @@ import android.util.Log;
 import static android.location.LocationManager.GPS_PROVIDER;
 
 
+
 public class GPSTracker extends Service implements LocationListener {
 
     private final Context aContext;
@@ -26,9 +27,10 @@ public class GPSTracker extends Service implements LocationListener {
     // network status (statusi i rrjetit)
     boolean isNetworkEnabled = false;
 
+    MyDBHandler myDBHandler;
+
     // GPS status
     boolean canGetLocation = false;
-
     Location location; // location(lokacioni)
     double latitude; // latitude(gjeresia)
     double longitude; // longitude(gjatesia)
@@ -37,9 +39,10 @@ public class GPSTracker extends Service implements LocationListener {
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 
     // The minimum time between updates in milliseconds (koha minimale qe duhet me ba update)
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60; // 1 minute
 
     // Declaring a Location Manager (Deklarim i menaxher lokacionit)
+    @SuppressWarnings("WeakerAccess")
     protected LocationManager locationManager;
 
     public GPSTracker(Context context){
@@ -48,7 +51,9 @@ public class GPSTracker extends Service implements LocationListener {
 
     }
 
+    @SuppressWarnings("WeakerAccess")
     public Location getLocation(){
+
         try {
             locationManager = (LocationManager) aContext.getSystemService(LOCATION_SERVICE);
 
@@ -58,6 +63,7 @@ public class GPSTracker extends Service implements LocationListener {
             // getting network status
             isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
+            //noinspection StatementWithEmptyBody
             if(!isGPSEnabled && !isNetworkEnabled){
                 // no network provider is enabled
             } else {
@@ -110,12 +116,13 @@ public class GPSTracker extends Service implements LocationListener {
     /**
      * Stop using GPS listener
      * Calling this function will stop using GPS in your app
-     * */
+     *
     public void stopUsingGPS(){
         if(locationManager != null){
             locationManager.removeUpdates(GPSTracker.this);
         }
     }
+     */
 
     /**
      * Function to get latitude

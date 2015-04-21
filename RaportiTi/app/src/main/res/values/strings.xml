@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">HELP!</string>
-    <string name="button1">SUBMIT COORDINATES</string>
+    <string name="button1">SUBMIT COORDINATES</string>t
+    <string name="button3">SEND COORDINATES</string>
+    <string name="button0">SHOW COORDINATES</string>
 </resources>
