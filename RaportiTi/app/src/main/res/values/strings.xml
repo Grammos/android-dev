@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">HELP!</string>
-    <string name="button1">SUBMIT COORDINATES</string>t
+    <string name="button1">SUBMIT COORDINATES</string>
     <string name="button3">SEND COORDINATES</string>
     <string name="button0">SHOW COORDINATES</string>
+        <string name="title_activity_main_activity2">SAVED DATA</string>
+
+    <string name="hello_world">These are the data that have been saved: </string>
+    <string name="action_settings">Settings</string>
 </resources>

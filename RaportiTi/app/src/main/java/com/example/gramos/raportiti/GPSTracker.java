@@ -27,7 +27,6 @@ public class GPSTracker extends Service implements LocationListener {
     // network status (statusi i rrjetit)
     boolean isNetworkEnabled = false;
 
-    MyDBHandler myDBHandler;
 
     // GPS status
     boolean canGetLocation = false;
