@@ -1,5 +1,6 @@
 package com.example.gramos.raportiti;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
@@ -17,22 +18,17 @@ import static android.location.LocationManager.GPS_PROVIDER;
 
 
 
+@SuppressLint("Registered")
 public class GPSTracker extends Service implements LocationListener {
 
     private final Context aContext;
 
-    // GPS status (statusi i GPS)
-    boolean isGPSEnabled = false;
-
-    // network status (statusi i rrjetit)
-    boolean isNetworkEnabled = false;
-
 
     // GPS status
-    boolean canGetLocation = false;
-    Location location; // location(lokacioni)
-    double latitude; // latitude(gjeresia)
-    double longitude; // longitude(gjatesia)
+    private boolean canGetLocation = false;
+    private Location location; // location(lokacioni)
+    private double latitude; // latitude(gjeresia)
+    private double longitude; // longitude(gjatesia)
 
     // The minimum distance to change Updates in meters (distanca minimale per me e ba update coor.)
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
@@ -40,27 +36,23 @@ public class GPSTracker extends Service implements LocationListener {
     // The minimum time between updates in milliseconds (koha minimale qe duhet me ba update)
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60; // 1 minute
 
-    // Declaring a Location Manager (Deklarim i menaxher lokacionit)
-    @SuppressWarnings("WeakerAccess")
-    protected LocationManager locationManager;
-
     public GPSTracker(Context context){
         this.aContext = context;
         getLocation();
 
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public Location getLocation(){
+    @SuppressWarnings("UnusedReturnValue")
+    private Location getLocation(){
 
         try {
-            locationManager = (LocationManager) aContext.getSystemService(LOCATION_SERVICE);
+            LocationManager locationManager = (LocationManager) aContext.getSystemService(LOCATION_SERVICE);
 
             // getting GPS status
-            isGPSEnabled = locationManager.isProviderEnabled(GPS_PROVIDER);
+            boolean isGPSEnabled = locationManager.isProviderEnabled(GPS_PROVIDER);
 
             // getting network status
-            isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+            boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
             //noinspection StatementWithEmptyBody
             if(!isGPSEnabled && !isNetworkEnabled){
@@ -74,27 +66,23 @@ public class GPSTracker extends Service implements LocationListener {
                            MIN_TIME_BW_UPDATES,
                            MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                    Log.d("Network", "Network");
-               if(locationManager != null){
                    location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                    if (location != null){
-                        latitude = location.getLatitude();
-                        longitude = location.getLongitude();
+                   if (location != null){
+                       latitude = location.getLatitude();
+                       longitude = location.getLongitude();
 
-                    }
-               }
-               // if GPS Enabled get lat/long using GPS services
+                   }
+                   // if GPS Enabled get lat/long using GPS services
                if(isGPSEnabled) {
                    if (location == null) {
                        locationManager.requestLocationUpdates(
-                               LocationManager.GPS_PROVIDER,MIN_TIME_BW_UPDATES,
+                               LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES,
                                MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                        Log.d("GPS Enabled", "GPS Enabled");
-                       if (locationManager != null) {
-                           location = locationManager.getLastKnownLocation(GPS_PROVIDER);
-                           if (location != null) {
-                               latitude = location.getLatitude();
-                               longitude = location.getLongitude();
-                           }
+                       location = locationManager.getLastKnownLocation(GPS_PROVIDER);
+                       if (location != null) {
+                           latitude = location.getLatitude();
+                           longitude = location.getLongitude();
                        }
 
                    }

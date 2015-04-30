@@ -9,13 +9,10 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-    private MyDBHandler myDbHandler = new MyDBHandler(this);
-
-    Button button1, button0;
+    private final MyDBHandler myDbHandler = new MyDBHandler(this);
 
 
-
-    GPSTracker gps;
+    private GPSTracker gps;
 
 
     @Override
@@ -26,7 +23,7 @@ public class MainActivity extends Activity {
         OnClickButtonListener();
 
 
-        button1 = (Button) findViewById(R.id.button1);
+        Button button1 = (Button) findViewById(R.id.button1);
 
         //show submit button click event
         button1.setOnClickListener(new View.OnClickListener() {
@@ -35,11 +32,10 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
 
-
                 gps = new GPSTracker(MainActivity.this);
 
                 // check if GPS enabled
-                if(gps.canGetLocation()){
+                if (gps.canGetLocation()) {
 
                     double latitude = gps.getLatitude();
                     double longitude = gps.getLongitude();
@@ -48,7 +44,7 @@ public class MainActivity extends Activity {
                     Toast.makeText(getApplicationContext(), "Your Location is -\nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
 
                     myDbHandler.insertRecord(latitude, longitude);
-                }else{
+                } else {
 
 
                     gps.showOneButtonDialog();
@@ -59,8 +55,8 @@ public class MainActivity extends Activity {
 
     }
 
-    public void OnClickButtonListener(){
-        button0 = (Button) findViewById(R.id.button2);
+    private void OnClickButtonListener(){
+        Button button0 = (Button) findViewById(R.id.button2);
         button0.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

@@ -1,14 +1,18 @@
 package com.example.gramos.raportiti;
 
 
+
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 
 
 
+@SuppressWarnings("ALL")
 public class MainActivity2 extends ActionBarActivity {
+
+
 
 
     @Override
@@ -16,8 +20,12 @@ public class MainActivity2 extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_activity2);
 
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
+        //noinspection ConstantConditions
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+
+
 
     }
 
@@ -32,13 +40,4 @@ public class MainActivity2 extends ActionBarActivity {
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-
-        return super.onOptionsItemSelected(item);
-    }
 }
