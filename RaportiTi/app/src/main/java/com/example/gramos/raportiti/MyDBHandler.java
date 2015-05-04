@@ -7,15 +7,25 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MyDBHandler extends SQLiteOpenHelper {
 
+    //All static variables
 
-
+    // Database version
     private static final int DATABASE_VERSION = 1;
+
+    // Database name
     private static final String DATABASE_NAME = "gps_coordinates.db";
+
+    // Database table name
     public static final String TABLE_COORDINATES = "coordinates";
-    public static final String COLUMN_ID = "id";
+
+    // database(gps_coordinates.db) table's columns names
+    public static final String COLUMN_ID = "_id";
     public static final String COLUMN_LAT = "lat";
     public static final String COLUMN_LNG = "lng";
 
@@ -24,6 +34,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    //  Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE " + TABLE_COORDINATES + "(" +
@@ -36,11 +47,14 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     }
 
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // not required until second version :)
+
     }
 
-
+    //Adding new Coordinates
     public void insertRecord(double lat, double lng) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -50,20 +64,54 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         // Inserting Row
         db.insert(TABLE_COORDINATES, null, values);
-        db.close(); // Closing db connections
+        // Closing db connections
+        db.close();
     }
 
-    public void getAllCoordinates(){
+    // Getting single Coordinates
+    public DatabaseO get_DatabaseOb(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_COORDINATES, new String[] { COLUMN_ID,
-                COLUMN_LNG, COLUMN_LAT }, null, null, null, null, null);
-
+        Cursor cursor = db.query(TABLE_COORDINATES, new String[]{COLUMN_ID, COLUMN_LAT,
+                        COLUMN_LNG}, COLUMN_ID + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
+        DatabaseO databaseO = new DatabaseO(Integer.parseInt(cursor.getString(0)),
+                Double.parseDouble(cursor.getString(1)), Double.parseDouble(cursor.getString(2)));
+
+        db.close();
+
+        return databaseO;
+
     }
 
+    // Getting all Coordinates
+    public List<DatabaseO> getAllDataObCoo() {
+        List<DatabaseO> coordinates = new ArrayList<DatabaseO>();
+        //Select all query
+        String selectQuery = "SELECT * FROM " + TABLE_COORDINATES;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        //looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                DatabaseO databaseO = new DatabaseO();
+                databaseO.setID(Integer.parseInt(cursor.getString(0)));
+                databaseO.setLat(Double.parseDouble(cursor.getString(1)));
+                databaseO.setLng(Double.parseDouble(cursor.getString(2)));
+
+                coordinates.add(databaseO);
+
+            } while (cursor.moveToNext());
+
+        }
+
+        return coordinates;
+    }
 
 
 

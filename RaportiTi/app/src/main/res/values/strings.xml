@@ -3,8 +3,13 @@
     <string name="button1">SUBMIT COORDINATES</string>
     <string name="button3">SEND COORDINATES</string>
     <string name="button0">SHOW COORDINATES</string>
-        <string name="title_activity_main_activity2">SAVED DATA</string>
+    <string name="title_activity_main_activity2">STORED DATA</string>
+    <string name="idi">ID</string>
+    <string name="lat">LATITUDE</string>
+    <string name="lng">LONGITUDE</string>
+    <string name="id1">ID</string>
+    <string name="lat1">LATITUDE</string>
+    <string name="lng1">LONGITUDE</string>
 
-    <string name="hello_world">These are the data that have been saved: </string>
-    <string name="action_settings">Settings</string>
+
 </resources>
