@@ -13,7 +13,6 @@
         android:text="@string/button1"
         android:id="@+id/button1"
         android:singleLine="true"
-        android:shadowColor="@android:color/background_dark"
         android:textColor="#000000"
         android:background="#ff16c4ff"
         android:nestedScrollingEnabled="false"
@@ -29,7 +28,6 @@
         android:layout_height="wrap_content"
         android:text="@string/button3"
         android:textColor="#000000"
-        android:shadowColor="@android:color/background_dark"
         android:width="320dp"
         android:id="@+id/button"
         android:layout_marginTop="10dp"
@@ -43,7 +41,6 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:shadowColor="@android:color/background_dark"
         android:text="@string/button0"
         android:textColor="#000000"
         android:id="@+id/button2"
