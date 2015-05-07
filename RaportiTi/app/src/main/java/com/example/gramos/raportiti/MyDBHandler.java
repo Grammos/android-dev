@@ -1,17 +1,18 @@
 package com.example.gramos.raportiti;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MyDBHandler extends SQLiteOpenHelper {
+@SuppressWarnings("ALL")
+class MyDBHandler extends SQLiteOpenHelper {
 
     //All static variables
 
@@ -19,13 +20,13 @@ public class MyDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Database name
-    private static final String DATABASE_NAME = "gps_coordinates.db";
+    public static final String DATABASE_NAME = "gps_coordinates.db";
 
     // Database table name
     public static final String TABLE_COORDINATES = "coordinates";
 
     // database(gps_coordinates.db) table's columns names
-    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_ID = "sid";
     public static final String COLUMN_LAT = "lat";
     public static final String COLUMN_LNG = "lng";
 
@@ -67,7 +68,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
         // Closing db connections
         db.close();
     }
-
     // Getting single Coordinates
     public DatabaseO get_DatabaseOb(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -78,8 +78,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        DatabaseO databaseO = new DatabaseO(Integer.parseInt(cursor.getString(0)),
-                Double.parseDouble(cursor.getString(1)), Double.parseDouble(cursor.getString(2)));
+        DatabaseO databaseO = new DatabaseO(Integer.parseInt(cursor != null ? cursor.getString(0) : null),
+                Double.parseDouble(cursor != null ? cursor.getString(1) : null), Double.parseDouble(cursor.getString(2)));
 
         db.close();
 
@@ -89,12 +89,12 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     // Getting all Coordinates
     public List<DatabaseO> getAllDataObCoo() {
-        List<DatabaseO> coordinates = new ArrayList<DatabaseO>();
+        List<DatabaseO> coordinates = new ArrayList<>();
         //Select all query
         String selectQuery = "SELECT * FROM " + TABLE_COORDINATES;
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(selectQuery, null);
 
         //looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -112,7 +112,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         return coordinates;
     }
-
 
 
 

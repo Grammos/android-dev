@@ -5,7 +5,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
     android:textAlignment="@integer/abc_max_action_buttons"
-    android:background="#fff0fcff">
+    android:background="#fff0fcff"
+    tools:ignore="Overdraw">
 
     <Button
         android:layout_width="wrap_content"
