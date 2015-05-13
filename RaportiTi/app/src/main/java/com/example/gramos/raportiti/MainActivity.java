@@ -163,38 +163,7 @@ public class MainActivity extends Activity {
                             } catch (IOException e) {
                                 e.fillInStackTrace();
                             }
-
-
-                            /**
-                             // Create a new HttpClient and Post Header
-                             HttpClient httpclient = new DefaultHttpClient();
-                             String url = "http://0.0.0.0:5000/geo-api";
-
-
-                             HttpPost httppost = new HttpPost(url);
-                             httppost.setHeader("Content-type", "application/json");
-                             StringEntity se = null;
-                             try {
-                             se = new StringEntity(jsonArray.toString());
-                             } catch (UnsupportedEncodingException e) {
-                             e.printStackTrace();
-                             }
-                             assert se != null;
-                             se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-                             httppost.setEntity(se);
-                             try {
-                             HttpResponse response = httpclient.execute(httppost);
-                             String temp = EntityUtils.toString(response.getEntity());
-                             Log.i("tag", temp);
-
-                             } catch (IOException e) {
-                             e.printStackTrace();
-
-                             }*/
-
-
-                            // System.out.println(jsonArray);
-                            //return jsonArray ;
+                            
 
                         }
 
