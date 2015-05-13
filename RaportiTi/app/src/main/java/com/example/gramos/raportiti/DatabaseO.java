@@ -1,9 +1,9 @@
 package com.example.gramos.raportiti;
 
 // maintain single contact as an object
-//import org.json.JSONException;
-//import org.json.JSONObject;
 
+
+import java.util.List;
 
 @SuppressWarnings("ALL")
 public class DatabaseO {
@@ -26,6 +26,7 @@ public class DatabaseO {
         this.lat = lat;
         this.lng = lng;
     }
+
 
     // getting ID
     public int getID() {
@@ -56,21 +57,7 @@ public class DatabaseO {
     public void setLng(double lng) {
         this.lng = lng;
     }
-    /**
-     public String toJSON(){
 
-     JSONObject jsonObject = new JSONObject();
-     try{
-     jsonObject.put("id", getID());
-     jsonObject.put("lat", getLat());
-     jsonObject.put("lng", getlng());
+    public List<DatabaseO> coordinates;
 
-     return jsonObject.toString();
-     }catch (JSONException e){
-     // TODO Auto-generated catch block
-     e.printStackTrace();
-     return "";
-     }
-     }
-     */
 }

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+//import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,7 +13,11 @@ import android.view.MenuItem;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
+/**
+ import org.json.JSONArray;
+ import org.json.JSONException;
+ import org.json.JSONObject;
+ */
 import java.util.List;
 
 
@@ -25,6 +30,8 @@ public class MainActivity2 extends AppCompatActivity {
         setContentView(R.layout.activity_main_activity2);
         ActionBar appCompatActivity = getSupportActionBar();
         createTable();
+        //toJson();
+
         if (appCompatActivity != null) {
             appCompatActivity.setHomeButtonEnabled(true);
             appCompatActivity.setDisplayHomeAsUpEnabled(true);
@@ -100,6 +107,46 @@ public class MainActivity2 extends AppCompatActivity {
         }
 
     }
+
+    /**
+     * I can convert the data from SQLite here
+     * public JSONArray toJson() {
+     * <p/>
+     * MyDBHandler myDBHandler = new MyDBHandler(this);
+     * <p/>
+     * // O is not zero (0)!!!! O stands for object
+     * List<DatabaseO> O = myDBHandler.getAllDataObCoo();
+     * JSONArray jsonArray = new JSONArray();
+     * <p/>
+     * <p/>
+     * <p/>
+     * try {
+     * for (DatabaseO cn : O) {
+     * <p/>
+     * JSONObject jsonObject = new JSONObject();
+     * jsonObject.put("id", cn.getID());
+     * jsonObject.put("lat", cn.getLat());
+     * jsonObject.put("lng", cn.getLng());
+     * <p/>
+     * <p/>
+     * jsonArray.put(jsonObject);
+     * <p/>
+     * }
+     * Log.d("", jsonArray.toString());
+     * <p/>
+     * <p/>
+     * <p/>
+     * } catch (JSONException e) {
+     * e.printStackTrace();
+     * } finally {
+     * myDBHandler.close();
+     * }
+     * <p/>
+     * System.out.println(jsonArray);
+     * return jsonArray ;
+     * <p/>
+     * }
+     */
 
 
     @Override

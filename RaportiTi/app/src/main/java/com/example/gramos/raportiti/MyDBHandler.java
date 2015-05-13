@@ -6,8 +6,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+//import android.util.Log; I used for a log display
+
 
 import java.util.ArrayList;
+//import java.util.HashMap;
 import java.util.List;
 
 
@@ -31,9 +34,12 @@ class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_LNG = "lng";
 
 
+
     public MyDBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
     }
+
 
     //  Creating Tables
     @Override
@@ -68,6 +74,7 @@ class MyDBHandler extends SQLiteOpenHelper {
         // Closing db connections
         db.close();
     }
+
     // Getting single Coordinates
     public DatabaseO get_DatabaseOb(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -92,7 +99,6 @@ class MyDBHandler extends SQLiteOpenHelper {
         List<DatabaseO> coordinates = new ArrayList<>();
         //Select all query
         String selectQuery = "SELECT * FROM " + TABLE_COORDINATES;
-
         SQLiteDatabase db = this.getWritableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -109,12 +115,45 @@ class MyDBHandler extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
 
         }
-
+        cursor.close();
+        db.close();
         return coordinates;
+    }
+
+/* it's the kind of the same thing like the upper method, but there i used list directly
+    public ArrayList<HashMap<String, String>> dataToJson() {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+
+        ArrayList<HashMap<String, String>> arrayListBiodata = new ArrayList<HashMap<String, String>>();
+
+        Cursor cursor = database.rawQuery("SELECT * FROM "+ TABLE_COORDINATES , null);
+
+
+        if (cursor.moveToFirst()) {
+            do {
+
+
+                HashMap<String, String> hashMapData = new HashMap<String, String>();
+
+                hashMapData.put("id", cursor.getString(0));
+                hashMapData.put("lat", cursor.getString(1));
+                hashMapData.put("lng", cursor.getString(2));
+
+
+                arrayListBiodata.add(hashMapData);
+
+            } while (cursor.moveToNext());
+        }
+        database.close();
+        cursor.close();
+        return arrayListBiodata;
+
     }
 
 
 
+*/
 }
 
 
