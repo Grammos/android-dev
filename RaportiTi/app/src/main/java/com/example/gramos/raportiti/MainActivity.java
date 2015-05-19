@@ -2,6 +2,7 @@ package com.example.gramos.raportiti;
 
 import android.app.Activity;
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -9,9 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -22,6 +21,8 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,6 +44,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         OnClickButtonListener();
+
 
 
         Button button1 = (Button) findViewById(R.id.button1);
@@ -128,7 +130,8 @@ public class MainActivity extends Activity {
                             }
 
 
-                            String url = "http://0.0.0.0:5000/geo-api";
+                            String url;
+                            url = "http://10.0.2.2:5000/geo-api";
                             // Create a new HttpClient and Post Header
 
                             HttpParams myParams = new BasicHttpParams();
@@ -145,6 +148,7 @@ public class MainActivity extends Activity {
                                 StringEntity se = new StringEntity(json);
                                 se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
                                 httppost.setEntity(se);
+                                //Log.d("tag", String.valueOf(se));
 
                                 if (android.os.Build.VERSION.SDK_INT > 9) {
                                     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -154,21 +158,15 @@ public class MainActivity extends Activity {
 
                                 HttpResponse response = httpclient.execute(httppost);
                                 String temp = EntityUtils.toString(response.getEntity());
-                                Log.i("tag", temp);
+                                //Log.d("tag", temp);
 
-
-                            } catch (ClientProtocolException e) {
-                                e.printStackTrace();
 
                             } catch (IOException e) {
-                                e.fillInStackTrace();
+                                e.printStackTrace();
                             }
-                            
+
 
                         }
-
-
-
                     }
                 }
         );
